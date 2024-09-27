@@ -6,6 +6,8 @@ import Charts from "./Charts";
 
 const Container = styled.div`
   padding: 0px 20px;
+  margin: auto;
+  max-width: 600px;
 `;
 
 const Header = styled.header`
@@ -62,10 +64,10 @@ const Tab = styled.span<{ $isActive: boolean }>`
   font-size: 12px;
   font-weight: 400;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) => (props.$isActive ? props.theme.accentColor : props.theme.textColor)};
   a {
+    padding: 7px 0px;
     display: block;
   }
 `;
