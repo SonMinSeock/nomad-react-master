@@ -29,7 +29,6 @@ const Coin = styled.li`
     display: flex;
     align-items: center;
     transition: color 0.2s ease-in-out;
-    display: block;
     padding: 20px;
   }
   &:hover {
@@ -86,7 +85,7 @@ function Coins() {
         <ConinsList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}>
+              <Link to={{ pathname: `/${coin.id}`, state: { name: coin.name } }}>
                 <Img src={`https://cryptoicon-api.pages.dev/icons/128/color/${coin.symbol.toLowerCase()}.png`} />
                 {coin.name} &rarr;
               </Link>
