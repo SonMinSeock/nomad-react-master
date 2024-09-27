@@ -62,6 +62,8 @@ function App() {
     }
     a {
       text-decoration: none;
+      color: inherit;
+      
     }
   `;
   return (
