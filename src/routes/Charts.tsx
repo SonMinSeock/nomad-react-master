@@ -1,6 +1,13 @@
-import React from "react";
+import { useQuery } from "react-query";
+import { fetchCoinHistory } from "../api";
 
-function Charts() {
+interface ChartsProps {
+  coinId: string;
+}
+
+function Charts({ coinId }: ChartsProps) {
+  const { isLoading, data } = useQuery(["ohlcv", coinId], () => fetchCoinHistory(coinId));
+
   return <div>Chart</div>;
 }
 
