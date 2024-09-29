@@ -1,9 +1,11 @@
-import React, { useState } from "react";
 import Router from "./Router";
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { lightTheme, darkTheme } from "./theme";
+import { useState } from "react";
 
 function App() {
+  const [isDark, setIsDark] = useState(false);
   const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
     html, body, div, span, applet, object, iframe,
@@ -68,11 +70,16 @@ function App() {
       
     }
   `;
+
+  const toggleDark = () => setIsDark((prev) => !prev);
   return (
     <>
-      <GlobalStyle />
-      <Router />
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+        <button onClick={toggleDark}>Toggle Mode</button>
+        <GlobalStyle />
+        <Router />
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </>
   );
 }
