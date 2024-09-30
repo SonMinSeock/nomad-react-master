@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface IForm {
@@ -8,6 +7,7 @@ interface IForm {
   username: string;
   password: string;
   password1: string;
+  extraError?: string; // 서버 에러 발생 할 경우 에러 메시지 할당.
 }
 
 function ToDoList() {
@@ -15,6 +15,7 @@ function ToDoList() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IForm>({
     defaultValues: {
       email: "@naver.com",
@@ -22,7 +23,11 @@ function ToDoList() {
   });
 
   const onValid = (data: IForm) => {
-    console.log(data);
+    if (data.password !== data.password1) {
+      setError("password1", { message: "Passowrd are not the same" }, { shouldFocus: true });
+    }
+    // 서버 에러 발생 할 경우 커스텀 에러 메시지 할당 한다고 가정해보자.
+    // setError("extraError", { message: "Server offline." });
   };
 
   return (
@@ -40,7 +45,16 @@ function ToDoList() {
         />
         <span>{errors?.email?.message}</span>
 
-        <input {...register("firstName", { required: "write here" })} placeholder="First Name" />
+        <input
+          {...register("firstName", {
+            required: "write here",
+            validate: {
+              noSon: (value) => (value.includes("son") ? "no son allowed" : true),
+              noNick: (value) => (value.includes("nick") ? "no nick allowed" : true),
+            },
+          })}
+          placeholder="First Name"
+        />
         <span>{errors?.firstName?.message}</span>
 
         <input {...register("lastName", { required: "write here" })} placeholder="Last Name" />
@@ -65,6 +79,7 @@ function ToDoList() {
         <span>{errors?.password1?.message}</span>
 
         <button>add</button>
+        <span>{errors.extraError?.message}</span>
       </form>
     </div>
   );
