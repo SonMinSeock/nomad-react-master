@@ -11,9 +11,14 @@ function ToDo({ text, category, id }: IToDo) {
 
     setToDos((oldToDos) => {
       const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
-      const newToDo = { text, category: name, id };
+      const newToDo = { text, category: name as any, id };
 
-      return oldToDos;
+      // 기존 배열에 해당 요소 변경 splice 하는 방법
+      const newToDos = [...oldToDos];
+      newToDos.splice(targetIndex, 1, newToDo);
+
+      //return [...oldToDos.slice(0, targetIndex), newToDo, ...oldToDos.slice(targetIndex + 1)];
+      return newToDos;
     });
   };
   return (
