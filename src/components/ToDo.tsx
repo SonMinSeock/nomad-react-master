@@ -9,7 +9,12 @@ function ToDo({ text, category, id }: IToDo) {
       currentTarget: { name },
     } = event;
 
-    console.log(name);
+    setToDos((oldToDos) => {
+      const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
+      const newToDo = { text, category: name, id };
+
+      return oldToDos;
+    });
   };
   return (
     <li>
