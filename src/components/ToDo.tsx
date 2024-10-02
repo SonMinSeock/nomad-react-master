@@ -21,6 +21,20 @@ function ToDo({ text, category, id }: IToDo) {
       return newToDos;
     });
   };
+
+  const onDelete = () => {
+    setToDos((oldToDos) => {
+      // const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
+
+      // const newToDos = [...oldToDos];
+      // newToDos.splice(targetIndex, 1);
+
+      // return newToDos;
+      const newToDos = oldToDos.filter((toDo) => toDo.id !== id);
+      return newToDos;
+    });
+  };
+
   return (
     <li>
       <span>{text}</span>
@@ -39,6 +53,7 @@ function ToDo({ text, category, id }: IToDo) {
           Done
         </button>
       )}
+      <button onClick={onDelete}>❌</button>
     </li>
   );
 }
