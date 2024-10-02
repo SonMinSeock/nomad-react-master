@@ -15,7 +15,7 @@ export interface IToDo {
 }
 
 const { persistAtom } = recoilPersist({
-  key: "toDosAtom",
+  key: "toDo",
 });
 
 export const categoryState = atom<Categories>({
