@@ -14,7 +14,6 @@ interface IAreaProps {
 
 const Wrapper = styled.div`
   width: 300px;
-  padding: 20px 10px;
   padding-top: 10px;
   background-color: ${(props) => props.theme.boardColor};
   border-radius: 5px;
@@ -31,9 +30,11 @@ const Title = styled.h2`
 `;
 
 const Area = styled.div<IAreaProps>`
-  background-color: ${(props) => (props.$isDragingOver ? "pink" : props.$draggingFromThisWith ? "red" : "blue")};
+  background-color: ${(props) =>
+    props.$isDragingOver ? "#dfe6e9" : props.$draggingFromThisWith ? "#b2bec3" : "transparent"};
   flex-grow: 1;
   transition: background-color 0.3s ease-in-out;
+  padding: 20px;
 `;
 
 function Board({ toDos, boardId }: IBoardProps) {
