@@ -34,8 +34,11 @@ function App() {
       // 같은 보드에서 이동
       setToDos((allBoards) => {
         const boardCopy = [...allBoards[source.droppableId]];
+        const taskObj = boardCopy[source.index];
+
         boardCopy.splice(source.index, 1);
-        boardCopy.splice(destination?.index, 0, draggableId);
+        boardCopy.splice(destination?.index, 0, taskObj);
+
         return {
           ...allBoards,
           [source.droppableId]: boardCopy,
@@ -48,9 +51,10 @@ function App() {
       setToDos((allBoards) => {
         const sourceBoard = [...allBoards[source.droppableId]];
         const targetBoard = [...allBoards[destination.droppableId]];
+        const taskObj = sourceBoard[source.index];
 
         sourceBoard.splice(source.index, 1);
-        targetBoard.splice(destination.index, 0, draggableId);
+        targetBoard.splice(destination.index, 0, taskObj);
 
         return {
           ...allBoards,
